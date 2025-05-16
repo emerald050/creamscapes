@@ -1,0 +1,342 @@
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffeddb;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.centered {
+  margin-top: 30vh;
+}
+
+h1 {
+  color: #593e09;
+  font-family: 'Sacramento', cursive;
+  font-size: 70px;
+  letter-spacing: 3px;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  color: #593e09;
+  font-weight: 600; /* You can use 700 for bolder text */
+}
+
+/* Apply styles only on the index page */
+.index-page h1, .index-page h2 {
+  margin-bottom: 10px; /* Reduce the gap between h1 and h2 */
+}
+
+/* Optional: If needed, reduce the margin specifically between h1 and h2 */
+.index-page h1 {
+  margin-bottom: 5px; /* Adjust this value as needed */
+  margin-left: 20px; 
+}
+
+.index-page h2 {
+  margin-top: 0; /* Remove the default top margin */
+}
+
+.start-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #e3cb96;
+  border-radius: 30px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.start-btn:hover {
+  background-color: #a69060;
+}
+
+.container {
+  padding: 20px;
+}
+
+.basket-wrapper {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+}
+
+#basket-img {
+  width: 100%;
+  display: block;
+}
+
+#flower-placement {
+  position: absolute;
+  top: 147px;
+  left: 63px;
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  pointer-events: none;
+}
+#flower-placement img {
+  width: 200px;
+  height: 130px;
+  margin-left: 0px; /* this creates the overlap */
+}
+#flower-placement img:first-child {
+  margin-left: 100; /* prevent left-most image from shifting */
+}
+
+#bow-placement {
+  position: absolute;
+  top: 110px;
+  left: 157px;
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  pointer-events: none;
+}
+#bow-placement img {
+  width: 110px;
+  height: 100px;
+}
+.flower-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flower-buttons button {
+  background: #fff;
+  border: 2px solid #e3cb96;
+  border-radius: 12px;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.flower-buttons button:hover {
+  transform: scale(1.1);
+}
+
+.flower-buttons img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+.next-btn {
+  display: inline-block;
+  padding: 13px 30px;
+  background-color: #e3cb96;
+  border-radius: 30px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  border: none;
+}
+
+.next-btn:hover{
+  background-color: #a69060;
+}
+
+#final-image-area {
+  position: relative;
+  display: inline-block;
+}
+
+#final-display {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+#final-wrapper {
+  position: relative;
+  width: 300px;
+}
+
+#final-basket {
+  width: 100%;
+}
+
+#final-flowers {
+  position: absolute;
+  top: 127px;
+  left: 51px;
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  pointer-events: none;
+}
+
+#final-flowers img {
+  width: 200px;
+  height: 130px;
+  margin-left: 0px; /* this creates the overlap */
+}
+
+#final-flowers img:first-child {
+  margin-left: 100; /* prevent left-most image from shifting */
+}
+#final-bow {
+  position: absolute;
+  top: 90px;
+  left: 100px;
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
+  pointer-events: none;
+}
+#final-bow img {
+  width: 100px;
+  height: 100px;
+}
+.temp-border {
+  border: 5px dashed #593e09;
+  padding: 10px;
+  border-radius: 20px; /* Adjust this value to change the curve */
+}
+/* Popup container */
+.popup-container {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  border: 5px dashed #e3cb96; /* Pink dashed inner border */
+}
+
+.popup-content h3 {
+  color: #593e09; /* Pinkish color */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.popup-content p {
+  font-size: 16px;
+  color: #444;
+}
+
+.popup-content button {
+  background-color: #e3cb96; /* Baby pink */
+  color: #593e09; /* Darker pink for text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.popup-content button:hover {
+  background-color: #593e09; /* Darker pink on hover */
+  color: white;
+}
+
+/* Button to go back to home */
+.home-btn {
+  background-color: #e3cb96; /* Baby pink */
+  color: #593e09;
+  border: 1px solid #593e09;
+  margin-top: 10px;
+}
+
+.home-btn:hover {
+  background-color: #593e09;
+  color: white;
+}
+/* Popup container */
+.popup-container {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  position: relative; /* Make sure the close button is positioned correctly */
+}
+
+.popup-content h3 {
+  color: #593e09; /* Pinkish color */
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.popup-content p {
+  font-size: 16px;
+  color: #444;
+}
+
+.popup-content button {
+  background-color: #593e09;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.popup-content button:hover {
+  background-color: #593e09;
+}
+
+/* Style for the Close button */
+.close-popup-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: #593e09;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.close-popup-btn:hover {
+  color: #593e09;
+}
+

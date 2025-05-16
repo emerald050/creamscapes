@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choose Your Flavour</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h2>Icing on the cake!</h2>
+    <div class="basket-wrapper temp-border">
+      <img id="basket-img" src="base.png" alt="Basket">
+      <div id="flower-placement"></div>
+    </div>
+
+    <div class="flower-buttons">
+      <button onclick="addFlower('p1.png')"><img src="p1.png" alt="Flower 1"></button>
+      <button onclick="addFlower('p2.png')"><img src="p2.png" alt="Flower 2"></button>
+      <button onclick="addFlower('p3.png')"><img src="p3.png" alt="Flower 3"></button>
+      <button onclick="addFlower('p4.png')"><img src="p4.png" alt="Flower 4"></button>
+      <button onclick="addFlower('p5.png')"><img src="p5.png" alt="Flower 5"></button>
+      <button onclick="addFlower('p6.png')"><img src="p6.png" alt="Flower 6"></button>
+      <button onclick="addFlower('p7.png')"><img src="p7.png" alt="Flower 6"></button>
+      <button onclick="addFlower('p8.png')"><img src="p8.png" alt="Flower 6"></button>
+    </div><br>
+    <button class="next-btn" onclick="goBack()">Previous</button>
+    <button class="next-btn" onclick="resetBasket()">Reset Basket</button>
+    <button class="next-btn" onclick="goToBow()">Next</button>
+  </div>
+
+  <!-- Pop-up for flower limit -->
+  <div id="popup-container" class="popup-container">
+    <div class="popup-content">
+      <h3>One at a time!</h3>
+      <p>You can only choose a single flavour.</p>
+      <button class="popup-btn" onclick="closePopup()">OK</button> <!-- Only OK button -->
+    </div>
+  </div>
+
+  <script>
+    const flowers = [];
+
+    function addFlower(src) {
+      if (flowers.length < 1) {
+        flowers.push(src);
+        const img = document.createElement('img');
+        img.src = src;
+        document.getElementById('flower-placement').appendChild(img);
+      } else {
+        showPopup(); // Show the pop-up when trying to add more than 3 flowers
+      }
+    }
+
+    function resetBasket() {
+      flowers.length = 0;
+      document.getElementById('flower-placement').innerHTML = '';
+    }
+
+    function goToBow() {
+      localStorage.setItem('flowers', JSON.stringify(flowers));
+      window.location.href = 'toppings.html';
+    }
+
+    function goBack() {
+      window.location.href = 'index.html'; // Navigate to 'index.html'
+    }
+
+    // Function to show the pop-up
+    function showPopup() {
+      document.getElementById('popup-container').style.display = 'flex';
+    }
+
+    // Function to close the pop-up
+    function closePopup() {
+      document.getElementById('popup-container').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

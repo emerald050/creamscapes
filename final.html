@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cake</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h2>Your Cake ♡</h2>
+    <div id="final-display">
+      <div id="final-image-area" class="basket-wrapper">
+        <img id="final-basket" src="base.png" alt="Basket">
+        <div id="final-flowers"></div>
+        <div id="final-bow"></div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="prepareExport()">Export as JPG</button>
+  </div>
+
+  <!-- Popup container -->
+  <div id="thank-you-popup" class="popup-container">
+    <div class="popup-content">
+      <h3>Thank You!</h3>
+      <p>Your image has been successfully downloaded. Thank you for trying out Creamscapes!</p>
+      <button onclick="goHome()">Back to Home</button>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const flowers = JSON.parse(localStorage.getItem('flowers')) || [];
+    const bow = localStorage.getItem('bow');
+    const isValidBow = bow && bow !== "null" && bow !== "undefined";
+    const flowerContainer = document.getElementById('final-flowers');
+    const bowContainer = document.getElementById('final-bow');
+
+    // Load images for flowers and bow on page load (but not export yet)
+    flowers.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      flowerContainer.appendChild(img);
+    });
+
+    if (isValidBow) {
+      const img = document.createElement('img');
+      img.src = bow;
+      bowContainer.appendChild(img);
+    } else {
+      bowContainer.style.display = 'none'; // Hide bow container if no bow is available
+    }
+
+    // Export function triggered only when the button is clicked
+    function prepareExport() {
+      exportAsImage();
+    }
+
+    // Function to export the arrangement as an image
+    function exportAsImage() {
+      html2canvas(document.getElementById('final-image-area'), {
+        useCORS: true,
+        backgroundColor: "#ffe6f0"
+      }).then(canvas => {
+        canvas.toBlob(function(blob) {
+          const link = document.createElement('a');
+          link.download = 'creamscapes.jpg';
+          link.href = URL.createObjectURL(blob);
+          link.click();
+          URL.revokeObjectURL(link.href); // Clean up
+          
+          // Show the "Thank You" popup
+          showPopup();
+        }, 'image/jpeg', 1.0);
+      });
+    }
+
+    // Show the popup after download
+    function showPopup() {
+      document.getElementById('thank-you-popup').style.display = 'flex';
+    }
+
+    // Close the popup
+    function closePopup() {
+      document.getElementById('thank-you-popup').style.display = 'none';
+    }
+
+    // Go back home (redirect to home page or reset state)
+    function goHome() {
+      window.location.href = 'index.html'; // Change this to your home page URL if different
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choose your toppings</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h2>Add your toppings!</h2>
+    <div class="basket-wrapper temp-border">
+      <img id="basket-img" src="base.png" alt="Basket">
+      <div id="flower-placement"></div>
+      <div id="bow-placement"></div>
+    </div>
+
+    <div class="flower-buttons">
+      <button onclick="selectBow('t1.png')"><img src="t1.png" alt="Bow 1"></button>
+      <button onclick="selectBow('t2.png')"><img src="t2.png" alt="Bow 1"></button>
+      <button onclick="selectBow('t3.png')"><img src="t3.png" alt="Bow 1"></button>
+      <button onclick="selectBow('t4.png')"><img src="t4.png" alt="Bow 1"></button>
+      <button onclick="selectBow('t5.png')"><img src="t5.png" alt="Bow 1"></button>
+      <button onclick="selectBow('t6.png')"><img src="t6.png" alt="Bow 1"></button>
+      <button onclick="selectBow('t7.png')"><img src="t7.png" alt="Bow 1"></button>
+      <button onclick="selectBow('t8.png')"><img src="t8.png" alt="Bow 1"></button>
+    </div><br>
+    <button class="next-btn" onclick="goBack()">Previous</button>
+    <button class="next-btn" onclick="resetBasket()">Reset Basket</button>
+    <button class="next-btn" onclick="goToFinal()">Next</button>
+  </div>
+
+  <script>
+    // Retrieve the flowers from localStorage
+    const flowers = JSON.parse(localStorage.getItem('flowers')) || [];
+    const flowerContainer = document.getElementById('flower-placement');
+
+    // Display the flowers in the same positions as on the flowers page
+    flowers.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      flowerContainer.appendChild(img);  // No change in position logic, keep as-is
+    });
+
+    // Select and display the bow
+    function selectBow(src) {
+      localStorage.setItem('bow', src); // Store the selected bow in localStorage
+      const bowContainer = document.getElementById('bow-placement');
+      bowContainer.innerHTML = ''; // Clear any previous bow
+
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.position = 'absolute';
+      img.style.top = '60%'; // Adjust based on basket handle
+      img.style.left = '50%'; // Center the bow
+      img.style.transform = 'translateX(-50%)'; // Center horizontally
+
+      bowContainer.appendChild(img);
+    }
+
+    function goToFinal() {
+      window.location.href = 'final.html';
+    }
+    function resetBasket() {
+  localStorage.removeItem('bow'); // Properly clear the stored bow
+  document.getElementById('bow-placement').innerHTML = ''; // Clear the visual
+  }
+  function goBack() {
+      window.location.href = 'cream.html'; // Navigate to 'index.html'
+    }
+  </script>
+</body>
+</html>
